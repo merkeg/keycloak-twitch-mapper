@@ -9,10 +9,7 @@ import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Tag;
 import io.micrometer.core.instrument.Tags;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -33,9 +30,9 @@ public class OAuth2Resource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes({MediaType.APPLICATION_FORM_URLENCODED, MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
     @Path("token")
-    public OAuth2Response token(OAuth2Request request) {
+    public OAuth2Response token(@BeanParam OAuth2Request request) {
         meterRegistry.counter("http_request_token_counter",
                 Tags.of(Tag.of("clientId", request.getClientId()), Tag.of("grantType", request.getGrantType()))).increment();
 

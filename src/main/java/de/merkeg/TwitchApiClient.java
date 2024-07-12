@@ -2,7 +2,10 @@ package de.merkeg;
 
 import de.merkeg.oauth2.data.OAuth2Request;
 import de.merkeg.oauth2.data.OAuth2TwitchResponse;
+import jakarta.ws.rs.BeanParam;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import jakarta.ws.rs.Path;
@@ -12,5 +15,6 @@ public interface TwitchApiClient {
 
     @POST
     @Path("/token")
-    OAuth2TwitchResponse tokenExchange(OAuth2Request request);
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    OAuth2TwitchResponse tokenExchange(@BeanParam OAuth2Request request);
 }
