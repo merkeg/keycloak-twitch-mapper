@@ -23,4 +23,7 @@ public class OAuth2Response {
 
     @JsonProperty("token_type")
     String tokenType;
+
+    @JsonProperty("id_token")
+    String idToken;
 }

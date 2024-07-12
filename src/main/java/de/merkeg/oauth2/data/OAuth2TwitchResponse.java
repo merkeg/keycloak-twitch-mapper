@@ -25,4 +25,7 @@ public class OAuth2TwitchResponse {
 
     @JsonProperty("token_type")
     String tokenType;
+
+    @JsonProperty("id_token")
+    String idToken;
 }
