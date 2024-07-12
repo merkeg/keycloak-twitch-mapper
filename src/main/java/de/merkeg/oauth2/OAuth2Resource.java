@@ -23,7 +23,6 @@ public class OAuth2Resource {
     OAuth2ResponseMapper mapper;
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
     @Path("token")
     public OAuth2Response token(OAuth2Request request) {
 
