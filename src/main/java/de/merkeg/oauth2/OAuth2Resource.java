@@ -11,11 +11,13 @@ import io.micrometer.core.instrument.Tags;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.print.attribute.standard.Media;
 
 @Path("/oauth2")
+@Slf4j
 public class OAuth2Resource {
 
     @Inject
@@ -33,8 +35,12 @@ public class OAuth2Resource {
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
     @Path("token")
     public OAuth2Response token(@BeanParam OAuth2Request request) {
+        log.debug("New token mapping request");
         OAuth2TwitchResponse response = twitchApiClient.tokenExchange(request);
+        log.debug("Got twitch response data: {}", response);
 
-        return mapper.map(response);
+        OAuth2Response mapped = mapper.map(response);
+        log.debug("Got mapped response data: {}", mapped);
+        return mapped;
     }
 }
