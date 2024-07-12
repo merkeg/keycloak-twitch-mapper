@@ -33,9 +33,6 @@ public class OAuth2Resource {
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
     @Path("token")
     public OAuth2Response token(@BeanParam OAuth2Request request) {
-        meterRegistry.counter("http_request_token_counter",
-                Tags.of(Tag.of("clientId", request.getClientId()), Tag.of("grantType", request.getGrantType()))).increment();
-
         OAuth2TwitchResponse response = twitchApiClient.tokenExchange(request);
 
         return mapper.map(response);
