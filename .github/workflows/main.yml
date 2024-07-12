@@ -30,6 +30,7 @@ jobs:
           arguments: |
             build
             -Dquarkus.native.enabled=true
+            -Dquarkus.package.jar.enabled=false
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v3
