@@ -45,11 +45,6 @@ public class OAuth2Resource {
         OAuth2Response mapped = mapper.map(response);
         log.debug("Got mapped response data: {}", mapped);
 
-        String idToken = mapped.getIdToken();
-        String[] split = idToken.split("\\.");
-        split[0] = split[0] + 'o';
-        mapped.setIdToken(String.join(".", split));
-
         ObjectMapper objectMapper = new ObjectMapper();
         log.debug(objectMapper.writeValueAsString(mapped));
 
